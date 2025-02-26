@@ -5,14 +5,37 @@ namespace TODO
     {
         static void Main(string[] args)
         {
-            while (true)
+            bool keepRunning = true;
+
+            while (keepRunning)
             {
-                string titleList = Console.ReadLine();
+                Console.Clear();
+                Console.WriteLine("What do you wish to do?");
+                Console.WriteLine("1 - Create a new list?");
+                Console.WriteLine("0 - Exit.");
 
-                List list = new List(titleList);
+                int response = GetUserResponseInt();
 
-                Console.WriteLine(list.Title);
+                if (response == 1) {
+                    Console.Clear();
+                    Console.WriteLine("Insert the title:");
+                    string titleList = Console.ReadLine();
+
+                    List list = new List(titleList);
+
+                    Console.WriteLine($"List {list.Title} created.");
+                } else if (response == 0) {
+                    keepRunning = false;
+                } else {
+                    Console.Clear();
+                    Console.WriteLine("Unavailable option.");
+                }
             }
+        }
+
+        static int GetUserResponseInt()
+        {
+            return Convert.ToInt16(Console.ReadLine());
         }
     }
 }
