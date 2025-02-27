@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TODO
+namespace TODO.Models
 {
-    public class List
+    public class ToDoList
     {
 
         private bool check = false;
         private string title;
         private string content = "";
 
-        public List(string aTitle)
+        public ToDoList(string aTitle)
         {
             title = aTitle;
         }
