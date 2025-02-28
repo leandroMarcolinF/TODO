@@ -1,4 +1,4 @@
-
+﻿
 using TODO.Models;
 
 namespace TODO
@@ -12,54 +12,24 @@ namespace TODO
     
             while (keepRunning)
             {
-                Console.Clear();
-                Console.WriteLine("What do you wish to do?");
-                Console.WriteLine("1 - Create a new list.");
-                Console.WriteLine("2 - Show all the lists.");
-                Console.WriteLine("3 - Delete a list.");
-                Console.WriteLine("0 - Exit.");
-
+                showOptions();
                 int response = GetUserResponseInt();
 
                 if (response == 1) 
                 {
-                    Console.Clear();
-                    Console.WriteLine("Insert the title:");
-                    string titleList = Console.ReadLine();
-
-                    lists.Add(new ToDoList(titleList));
-
-                    Console.WriteLine($"List {titleList} created.");
+                    createList(lists);
                 }
                 else if (response == 2)
                 {
-                    Console.Clear();
-
-                    foreach (ToDoList list in lists)
-                    {
-                        Console.WriteLine(list.Title);
-                    }
+                    showLists(lists);
                 }
                 else if (response == 3)
                 {
-                    Console.WriteLine("What list do you wish to delete:");
-
-                    for (int indexList = 0; indexList < lists.Count; indexList++)
-                    {
-                        Console.WriteLine($"{indexList}. {lists[indexList].Title}");
-                    }
-
-                    int indexOptionSelected = GetUserResponseInt();
-
-                    if (lists.ElementAtOrDefault(indexOptionSelected) == null) {
-                        Console.WriteLine("This list does not exist.");
-                    } else {
-                        lists.RemoveAt(indexOptionSelected);
-                    }
-
+                    deleteList(lists);
                 }
                 else if (response == 0) 
                 {
+                    Console.WriteLine("Bye bye.");
                     keepRunning = false;
                 } 
                 else 
@@ -70,6 +40,55 @@ namespace TODO
 
                 Console.WriteLine("Press any button to continue...");
                 Console.ReadKey();
+            }
+        }
+
+        static void showOptions()
+        {
+            Console.Clear();
+            Console.WriteLine("What do you wish to do?");
+            Console.WriteLine("1 - Create a new list.");
+            Console.WriteLine("2 - Show all the lists.");
+            Console.WriteLine("3 - Delete a list.");
+            Console.WriteLine("0 - Exit.");
+        }
+
+        static void createList(List<ToDoList> lists)
+        {
+            Console.Clear();
+            Console.WriteLine("Insert the title:");
+            string titleList = Console.ReadLine();
+
+            lists.Add(new ToDoList(titleList));
+
+            Console.WriteLine($"List {titleList} created.");
+        }
+
+        static void showLists(List<ToDoList> lists)
+        {
+            Console.Clear();
+
+            foreach (ToDoList list in lists)
+            {
+                Console.WriteLine(list.Title);
+            }
+        }
+
+        static void deleteList(List<ToDoList> lists)
+        {
+            Console.WriteLine("What list do you wish to delete:");
+
+            for (int indexList = 0; indexList < lists.Count; indexList++)
+            {
+                Console.WriteLine($"{indexList}. {lists[indexList].Title}");
+            }
+
+            int indexOptionSelected = GetUserResponseInt();
+
+            if (lists.ElementAtOrDefault(indexOptionSelected) == null) {
+                Console.WriteLine("This list does not exist.");
+            } else {
+                lists.RemoveAt(indexOptionSelected);
             }
         }
 
