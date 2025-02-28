@@ -1,4 +1,4 @@
-﻿
+
 using TODO.Models;
 
 namespace TODO
@@ -94,7 +94,14 @@ namespace TODO
 
         static int GetUserResponseInt()
         {
-            return Convert.ToInt16(Console.ReadLine());
+            string response = Console.ReadLine();
+
+            if (response == "") 
+            {
+                return 0;
+            } else {
+                return Convert.ToInt16(response);
+            }
         }
     }
 }
