@@ -1,4 +1,4 @@
-﻿
+
 using TODO.Models;
 
 namespace TODO
@@ -44,17 +44,19 @@ namespace TODO
                 {
                     Console.WriteLine("What list do you wish to delete:");
 
-                    foreach (ToDoList list in lists)
-                    {
-                        
-                    }
-
                     for (int indexList = 0; indexList < lists.Count; indexList++)
                     {
                         Console.WriteLine($"{indexList}. {lists[indexList].Title}");
                     }
 
-                    lists.RemoveAt(GetUserResponseInt());
+                    int indexOptionSelected = GetUserResponseInt();
+
+                    if (lists.ElementAtOrDefault(indexOptionSelected) == null) {
+                        Console.WriteLine("This list does not exist.");
+                    } else {
+                        lists.RemoveAt(indexOptionSelected);
+                    }
+
                 }
                 else if (response == 0) 
                 {
