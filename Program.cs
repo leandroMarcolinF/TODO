@@ -1,4 +1,4 @@
-
+﻿
 using TODO.Models;
 
 namespace TODO
@@ -27,6 +27,25 @@ namespace TODO
                 {
                     deleteList(lists);
                 }
+                else if (response == 4)
+                {
+                    Console.WriteLine("What list do you wish to add a item:");
+
+                    for (int indexList = 0; indexList < lists.Count; indexList++)
+                    {
+                        Console.WriteLine($"{indexList}. {lists[indexList].Title}");
+                    }
+
+                    int indexOptionSelected = GetUserResponseInt();
+
+                    if (lists.ElementAtOrDefault(indexOptionSelected) == null) {
+                        Console.WriteLine("This list does not exist.");
+                    } else {
+                        Console.WriteLine("Insert item's title:");
+                        string title = Console.ReadLine();
+                        lists[indexOptionSelected].CreateItem(title);
+                    }
+                }
                 else if (response == 0) 
                 {
                     Console.WriteLine("Bye bye.");
@@ -50,6 +69,8 @@ namespace TODO
             Console.WriteLine("1 - Create a new list.");
             Console.WriteLine("2 - Show all the lists.");
             Console.WriteLine("3 - Delete a list.");
+            Console.WriteLine("4 - Add item to a list.");
+            //Console.WriteLine("5 - Show items of a list.");
             Console.WriteLine("0 - Exit.");
         }
 
