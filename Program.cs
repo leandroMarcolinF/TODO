@@ -29,22 +29,7 @@ namespace TODO
                 }
                 else if (response == 4)
                 {
-                    Console.WriteLine("What list do you wish to add a item:");
-
-                    for (int indexList = 0; indexList < lists.Count; indexList++)
-                    {
-                        Console.WriteLine($"{indexList}. {lists[indexList].Title}");
-                    }
-
-                    int indexOptionSelected = GetUserResponseInt();
-
-                    if (lists.ElementAtOrDefault(indexOptionSelected) == null) {
-                        Console.WriteLine("This list does not exist.");
-                    } else {
-                        Console.WriteLine("Insert item's title:");
-                        string title = Console.ReadLine();
-                        lists[indexOptionSelected].CreateItem(title);
-                    }
+                    createITem(lists);
                 }
                 else if (response == 0) 
                 {
@@ -99,10 +84,7 @@ namespace TODO
         {
             Console.WriteLine("What list do you wish to delete:");
 
-            for (int indexList = 0; indexList < lists.Count; indexList++)
-            {
-                Console.WriteLine($"{indexList}. {lists[indexList].Title}");
-            }
+            showListsOptions(lists);
 
             int indexOptionSelected = GetUserResponseInt();
 
@@ -110,6 +92,31 @@ namespace TODO
                 Console.WriteLine("This list does not exist.");
             } else {
                 lists.RemoveAt(indexOptionSelected);
+            }
+        }
+//✓□
+        static void createITem(List<ToDoList> lists)
+        {
+            Console.WriteLine("What list do you wish to add a item:");
+
+            showListsOptions(lists);
+
+            int indexOptionSelected = GetUserResponseInt();
+
+            if (lists.ElementAtOrDefault(indexOptionSelected) == null) {
+                Console.WriteLine("This list does not exist.");
+            } else {
+                Console.WriteLine("Insert item's title:");
+                string title = Console.ReadLine();
+                lists[indexOptionSelected].CreateItem(title);
+            }
+        }
+
+        static void showListsOptions(List<ToDoList> lists)
+        {
+            for (int indexList = 0; indexList < lists.Count; indexList++)
+            {
+                Console.WriteLine($"{indexList}. {lists[indexList].Title}");
             }
         }
 
