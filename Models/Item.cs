@@ -18,6 +18,27 @@ namespace TODO.Models
             dateTime = DateTime.Now;
         }
 
+        public string Title
+        {
+            get { return title; }
+            set {
+                Console.WriteLine(value.Length);
+                if (value.Length <= 20) {
+                    title = value;
+                }
+            }
+        }
+
+        public bool Check
+        {
+            get { return check; }
+            set {
+                if (check == true) {
+                    throw new Exception("You can not uncheck an item.");
+                }
+            }
+        }
+
         private void UpdateTitle(string newTitle)
         {
             ValidateTitle(newTitle);
