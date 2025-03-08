@@ -47,5 +47,23 @@ namespace TODO.Models
         {
             items.Add(new Item(titleItem, check));
         }
+
+        public void ShowItems()
+        {
+            foreach (Item item in items)
+            {
+                string checkSymbol = "";
+
+                if (item.Check == false) {
+                    checkSymbol = "( )";
+                }
+
+                if (item.Check == true) {
+                    checkSymbol = "(X)";
+                }
+
+                Console.WriteLine($"{checkSymbol} {item.Title}");
+            }
+        }
     }
 }

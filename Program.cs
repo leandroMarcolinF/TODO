@@ -29,7 +29,44 @@ namespace TODO
                 }
                 else if (response == 4)
                 {
-                    createITem(lists);
+                    bool keepRunningItems = true;
+
+                    Console.WriteLine("What list do you wish to alter:");
+
+                    showListsOptions(lists);
+
+                    int listSelected = GetUserResponseInt();
+
+                    while (keepRunningItems)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("What do you wish to do?");
+                        Console.WriteLine("1 - Add item to the list.");
+                        Console.WriteLine("2 - Show all items.");
+                        Console.WriteLine("3 - Check item.");
+                        Console.WriteLine("0 - Exit.");
+                        
+                        response = GetUserResponseInt();
+
+                        if (response == 1) 
+                        {
+                            createItem(lists, listSelected);
+                        } 
+                        else if (response == 2)
+                        {
+                            lists[listSelected].ShowItems();
+                        }
+                        else if (response == 3)
+                        {
+                        }
+                        else
+                        {
+                            keepRunningItems = false;
+                        }
+
+                        Console.WriteLine("Press any button to continue...");
+                        Console.ReadKey();
+                    }
                 }
                 else if (response == 0) 
                 {
@@ -54,8 +91,7 @@ namespace TODO
             Console.WriteLine("1 - Create a new list.");
             Console.WriteLine("2 - Show all the lists.");
             Console.WriteLine("3 - Delete a list.");
-            Console.WriteLine("4 - Add item to a list.");
-            //Console.WriteLine("5 - Show items of a list.");
+            Console.WriteLine("4 - Access a list.");
             Console.WriteLine("0 - Exit.");
         }
 
@@ -94,21 +130,15 @@ namespace TODO
                 lists.RemoveAt(indexOptionSelected);
             }
         }
-//✓□
-        static void createITem(List<ToDoList> lists)
+
+        static void createItem(List<ToDoList> lists, int listSelected)
         {
-            Console.WriteLine("What list do you wish to add a item:");
-
-            showListsOptions(lists);
-
-            int indexOptionSelected = GetUserResponseInt();
-
-            if (lists.ElementAtOrDefault(indexOptionSelected) == null) {
+            if (lists.ElementAtOrDefault(listSelected) == null) {
                 Console.WriteLine("This list does not exist.");
             } else {
                 Console.WriteLine("Insert item's title:");
                 string title = Console.ReadLine();
-                lists[indexOptionSelected].CreateItem(title);
+                lists[listSelected].CreateItem(title);
             }
         }
 
