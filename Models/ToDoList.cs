@@ -7,7 +7,6 @@ namespace TODO.Models
 {
     public class ToDoList
     {
-        private bool allListcheck = false;
         private string title;
         private string description = "";
         private List<Item> items;
@@ -16,18 +15,6 @@ namespace TODO.Models
         {
             title = aTitle;
             items = new();
-        }
-
-        public bool AllListcheck
-        {
-            get { return allListcheck;}
-            set {
-                if (value == false) {
-                    allListcheck = value;
-                } else {
-                    Console.WriteLine("You can not uncheck.");
-                }
-            }
         }
 
         public string Title
@@ -39,6 +26,19 @@ namespace TODO.Models
                     title = value;
                 } else {
                     Console.WriteLine("The title is longer than allowed.");
+                }
+            }
+        }
+
+        public string Description
+        {
+            get { return description; }
+            set {
+                Console.WriteLine(value.Length);
+                if (value.Length <= 100) {
+                    title = value;
+                } else {
+                    Console.WriteLine("The description is longer than allowed.");
                 }
             }
         }

@@ -8,12 +8,13 @@ namespace TODO
         static void Main(string[] args)
         {
             bool keepRunning = true;
+            int response;
             List<ToDoList> lists = new List<ToDoList>();
     
             while (keepRunning)
             {
                 showOptions();
-                int response = GetUserResponseInt();
+                response = GetUserResponseInt();
 
                 if (response == 1) 
                 {
@@ -29,44 +30,7 @@ namespace TODO
                 }
                 else if (response == 4)
                 {
-                    bool keepRunningItems = true;
-
-                    Console.WriteLine("What list do you wish to alter:");
-
-                    showListsOptions(lists);
-
-                    int listSelected = GetUserResponseInt();
-
-                    while (keepRunningItems)
-                    {
-                        Console.Clear();
-                        Console.WriteLine("What do you wish to do?");
-                        Console.WriteLine("1 - Add item to the list.");
-                        Console.WriteLine("2 - Show all items.");
-                        Console.WriteLine("3 - Check item.");
-                        Console.WriteLine("0 - Exit.");
-                        
-                        response = GetUserResponseInt();
-
-                        if (response == 1) 
-                        {
-                            createItem(lists, listSelected);
-                        } 
-                        else if (response == 2)
-                        {
-                            lists[listSelected].ShowItems();
-                        }
-                        else if (response == 3)
-                        {
-                        }
-                        else
-                        {
-                            keepRunningItems = false;
-                        }
-
-                        Console.WriteLine("Press any button to continue...");
-                        Console.ReadKey();
-                    }
+                    accessListOptions(lists);
                 }
                 else if (response == 0) 
                 {
@@ -113,6 +77,49 @@ namespace TODO
             foreach (ToDoList list in lists)
             {
                 Console.WriteLine(list.Title);
+            }
+        }
+
+        static void accessListOptions(List<ToDoList> lists)
+        {
+            bool keepRunningItems = true;
+            int response;
+
+            Console.WriteLine("What list do you wish to alter:");
+
+            showListsOptions(lists);
+
+            int listSelected = GetUserResponseInt();
+
+            while (keepRunningItems)
+            {
+                Console.Clear();
+                Console.WriteLine("What do you wish to do?");
+                Console.WriteLine("1 - Add item to the list.");
+                Console.WriteLine("2 - Show all items.");
+                Console.WriteLine("3 - Check item.");
+                Console.WriteLine("0 - Exit.");
+                
+                response = GetUserResponseInt();
+
+                if (response == 1) 
+                {
+                    createItem(lists, listSelected);
+                } 
+                else if (response == 2)
+                {
+                    lists[listSelected].ShowItems();
+                }
+                else if (response == 3)
+                {
+                }
+                else
+                {
+                    keepRunningItems = false;
+                }
+
+                Console.WriteLine("Press any button to continue...");
+                Console.ReadKey();
             }
         }
 
