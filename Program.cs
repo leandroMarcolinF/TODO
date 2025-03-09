@@ -80,16 +80,37 @@ namespace TODO
             }
         }
 
+        static void deleteList(List<ToDoList> lists)
+        {
+            Console.Clear();
+            Console.WriteLine("What list do you wish to delete:");
+
+            showListsOptions(lists);
+
+            int indexOptionSelected = GetUserResponseInt();
+
+            if (lists.ElementAtOrDefault(indexOptionSelected) == null) {
+                Console.WriteLine("This list does not exist.");
+            } else {
+                lists.RemoveAt(indexOptionSelected);
+            }
+        }
+
         static void accessListOptions(List<ToDoList> lists)
         {
             bool keepRunningItems = true;
             int response;
-
+            
             Console.WriteLine("What list do you wish to alter:");
 
             showListsOptions(lists);
 
             int listSelected = GetUserResponseInt();
+
+            if (lists.ElementAtOrDefault(listSelected) == null) {
+                Console.WriteLine("This list does not exist.");
+                keepRunningItems = false;
+            }
 
             while (keepRunningItems)
             {
@@ -112,6 +133,21 @@ namespace TODO
                 }
                 else if (response == 3)
                 {
+                    Console.Clear();
+                    var items = lists[listSelected].Items;
+                    
+                    Console.WriteLine("What item do you wish to check?");
+                    
+                    for (int indexItem = 0; indexItem < items.Count; indexItem++)
+                    {
+                        if (items[indexItem].Check != true) {
+                            1Console.WriteLine($"{indexItem}. {items[indexItem].Title}");
+                        }
+                    }
+
+                    int itemSelected = GetUserResponseInt();
+
+                    items[itemSelected].Check = true;
                 }
                 else
                 {
@@ -123,23 +159,10 @@ namespace TODO
             }
         }
 
-        static void deleteList(List<ToDoList> lists)
-        {
-            Console.WriteLine("What list do you wish to delete:");
-
-            showListsOptions(lists);
-
-            int indexOptionSelected = GetUserResponseInt();
-
-            if (lists.ElementAtOrDefault(indexOptionSelected) == null) {
-                Console.WriteLine("This list does not exist.");
-            } else {
-                lists.RemoveAt(indexOptionSelected);
-            }
-        }
-
         static void createItem(List<ToDoList> lists, int listSelected)
         {
+            Console.Clear();
+
             if (lists.ElementAtOrDefault(listSelected) == null) {
                 Console.WriteLine("This list does not exist.");
             } else {

@@ -22,7 +22,6 @@ namespace TODO.Models
         {
             get { return title; }
             set {
-                Console.WriteLine(value.Length);
                 if (value.Length <= 20) {
                     title = value;
                 }
@@ -36,6 +35,8 @@ namespace TODO.Models
                 if (check == true) {
                     throw new Exception("You can not uncheck an item.");
                 }
+
+                check = value;
             }
         }
 

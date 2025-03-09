@@ -17,6 +17,8 @@ namespace TODO.Models
             items = new();
         }
 
+        public List<Item> Items => items;
+
         public string Title
         {
             get { return title; }
@@ -52,15 +54,7 @@ namespace TODO.Models
         {
             foreach (Item item in items)
             {
-                string checkSymbol = "";
-
-                if (item.Check == false) {
-                    checkSymbol = "( )";
-                }
-
-                if (item.Check == true) {
-                    checkSymbol = "(X)";
-                }
+                string checkSymbol = item.Check ? "(X)" : "()";
 
                 Console.WriteLine($"{checkSymbol} {item.Title}");
             }
