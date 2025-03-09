@@ -141,7 +141,7 @@ namespace TODO
                     for (int indexItem = 0; indexItem < items.Count; indexItem++)
                     {
                         if (items[indexItem].Check != true) {
-                            1Console.WriteLine($"{indexItem}. {items[indexItem].Title}");
+                            Console.WriteLine($"{indexItem}. {items[indexItem].Title}");
                         }
                     }
 
